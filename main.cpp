@@ -12,7 +12,7 @@ const string RED = "\033[31m";
 const string YELLOW = "\033[33m";
 const string RESET = "\033[0m";
 
-void printArray(vector<int>& arr, int n, string color) {
+void printArray(int *arr, int n, string color) {
     cout << color;
     for (int i = 0; i < n; i++) {
         cout << arr[i] << " ";
@@ -20,33 +20,54 @@ void printArray(vector<int>& arr, int n, string color) {
     cout << RESET << endl;
 }
 
-void countingSort(vector<int>& arr, int n) {
-    // find maximum element in the array
-    int maxVal = *max_element(arr.begin(), arr.end());
-    cout << endl << "Max value: " << maxVal << endl << endl;
+void countingSort(int *arr, int n) {
+    
+    // find maximum element in the array    
+    int k;
+    k = *arr;
 
-    // create count array with size equal to (maxVal + 1)
-    vector<int> count(maxVal + 1, 0);
+    for(int i = 0; i < n; i++){
+        if(arr[i] > k) {
+            k = arr[i];
+        }
+    }
+
+    cout << endl << "Max value: " << k << endl << endl;
+
+    // create count array with size equal to (k + 1) and assign every value to 0
+    int count[k+1];
+    
+    for(int i = 0; i < k+1; i++) {
+        count[i] = 0;
+    }
+    
+    //create output array with size equal to n
+    int output[n];
+
+    //for visualization purpose only. Can be removed if not needed.
+    for(int i = 0; i < n; i++) {
+        output[i] = 0;
+    }
+   
 
     // count frequency of each element in the input array
     for (int i = 0; i < n; i++) {
         count[arr[i]]++;
         cout << "Count array after processing element " << arr[i] << ": ";
-        printArray(count, maxVal + 1, RED);
+        printArray(count, k + 1, RED);
     }
 
     // calculate the sum of indexes
-    for (int i = 1; i <= maxVal; i++) {
+    for (int i = 1; i <= k; i++) {
         count[i] += count[i-1];
     }
     
 
     cout << endl << "Count array after adding the sum of indexes: ";
-    printArray(count, maxVal + 1, RED);
+    printArray(count, k + 1, RED);
     cout << endl;
     
-    // create output array and copy elements from input array to output array in sorted order
-    vector<int> output(n);
+    //copy elements from input array to output array in sorted order
     for (int i = n-1; i >= 0; i--) {
 
         cout << "Processing input: " << arr[i] << endl;
@@ -63,7 +84,7 @@ void countingSort(vector<int>& arr, int n) {
 
         
         cout << "Count array: ";
-        printArray(count, maxVal + 1, RED);
+        printArray(count, k + 1, RED);
         
         cout << endl;
     }
@@ -73,7 +94,7 @@ void countingSort(vector<int>& arr, int n) {
     cout << "Input array: ";
     printArray(arr, n, BLUE);
     cout << "Count array: ";
-    printArray(count, maxVal+1, RED);
+    printArray(count, k+1, RED);
     cout << "Output array: ";
     printArray(output, n, YELLOW);
 }
@@ -82,18 +103,18 @@ int main() {
     srand(time(nullptr));
 
     int n;
-    int k;
     cout << "Enter size of input array: ";
     cin >> n;
 
-    vector<int> arr(n);
+    int arr[n];
+    
     char choice;
-    cout << "Do you want to enter the numbers manually (y/n)? ";
+    cout << "Enter the numbers manually (y/n)? ";
     cin >> choice;
     if (choice == 'y') {
         
         for (int i = 0; i < n; i++) {
-            cout << "Enter numbers: " << (i+1);
+            cout << "Enter number " << (i+1) << ": ";
             cin >> arr[i];
         }
     } else {
