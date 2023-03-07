@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdlib>
 #include "color.h"
 
 using namespace std;
@@ -60,17 +59,14 @@ void countingSort(int *array, int n) {
     for (int i = 1; i <= k; i++) {
         count[i] += count[i-1];
     }
-    
 
     cout << endl << "Count array after storing the cumulative sum: ";
     printArray(count, k + 1, RED);
     cout << endl;
-    
 
     cout << GREEN;
     cout << "PHASE 04: PLACE AND DECREMENT" << endl;
     cout << RESET << endl;
-
 
     //create output array with size equal to n
     //Assigning it to 0 is for visualization purpose only. Can be removed if not needed.
@@ -93,10 +89,8 @@ void countingSort(int *array, int n) {
         cout << "Results" << endl;
         cout << "Output array: ";
         printArray(output, n, YELLOW);
-
         cout << "Count array: ";
         printArray(count, k + 1, RED);
-        
         cout << endl;
     }
 
@@ -133,7 +127,7 @@ void descendingCountingSort(int *array, int n) {
 
     cout << "Max value: " << k << endl << endl;
 
-    // create count array with size equal to (k + 1) and assign every value to 0
+    //Create count array with k + 1 size and assign every value to 0
     int count[k+1];
     
     for(int i = 0; i < k+1; i++) {
@@ -144,7 +138,7 @@ void descendingCountingSort(int *array, int n) {
     cout << "PHASE 02: COUNT/TALLY" << endl;
     cout << RESET << endl;
 
-    // count frequency of each element in the input array but you put it k - i index instead of i
+    // count frequency of each element in the input array
     for (int i = 0; i < n; i++) {
         count[k - array[i]]++;
         cout << "Count array after counting element " << array[i] << ": ";
@@ -187,10 +181,8 @@ void descendingCountingSort(int *array, int n) {
         cout << "Results" << endl;
         cout << "Output array: ";
         printArray(output, n, YELLOW);
-
         cout << "Count array: ";
         printArray(count, k + 1, RED);
-        
         cout << endl;
     }
 
