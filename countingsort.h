@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// A function that prints the given array of integers with the specified color
 void printArray(int *array, int n, string color) {
     cout << color;
     for (int i = 0; i < n; i++) {
@@ -12,7 +13,7 @@ void printArray(int *array, int n, string color) {
     cout << RESET << endl;
 }
 
-//counting sort implementation
+//A function that implements counting sort
 void countingSort(int *array, int n) {
         
     cout << endl << "Input array: ";
@@ -72,9 +73,8 @@ void countingSort(int *array, int n) {
 
 
     //create output array with size equal to n
+    //Assigning it to 0 is for visualization purpose only. Can be removed if not needed.
     int output[n];
-
-    //for visualization purpose only. Can be removed if not needed.
     for(int i = 0; i < n; i++) {
         output[i] = 0;
     }
@@ -84,10 +84,10 @@ void countingSort(int *array, int n) {
 
         cout << "Processing input: " << array[i] << endl;
 
-        cout << "\t Placing number " << array[i] << " to index " << count[array[i]] - 1 << " of the output array."<< endl;
+        cout << "\t Copying number " << array[i] << " to index " << count[array[i]] - 1 << " of the output array."<< endl;
         output[count[array[i]]-1] = array[i];
         
-        cout << "\t Decrementing the value of index " << array[i] << endl; 
+        cout << "\t Decrementing the value of index " << array[i] << "." << endl; 
         count[array[i]]--;
         
         cout << "Results" << endl;
@@ -112,7 +112,7 @@ void countingSort(int *array, int n) {
     printArray(output, n, YELLOW);
 }
 
-//descending counting sort implementation
+//A function that implements a descending counting sort
 void descendingCountingSort(int *array, int n) {
    
     cout << endl << "Input array: ";
@@ -146,7 +146,7 @@ void descendingCountingSort(int *array, int n) {
 
     // count frequency of each element in the input array but you put it k - i index instead of i
     for (int i = 0; i < n; i++) {
-        count[k - array[i]]++; // note the change here
+        count[k - array[i]]++;
         cout << "Count array after counting element " << array[i] << ": ";
         printArray(count, k + 1, RED);
     }
@@ -168,9 +168,8 @@ void descendingCountingSort(int *array, int n) {
     cout << RESET << endl;
 
     //create output array with size equal to n
+    //Assigning it to 0 is for visualization purpose only. Can be removed if not needed.
     int output[n];
-
-    //for visualization purpose only. Can be removed if not needed.
     for(int i = 0; i < n; i++) {
         output[i] = 0;
     }
@@ -179,10 +178,10 @@ void descendingCountingSort(int *array, int n) {
     for (int i = 0; i < n; i++) {
         cout << "Processing input: " << array[i] << endl;
 
-        cout << "\t Placing number " << array[i] << " to index " << n - count[k - array[i]] << " of the output array."<< endl;
+        cout << "\t Copying number " << array[i] << " to (n - count[k - " << array[i] << "]) which is index " << n - count[k - array[i]] << " of the output array."<< endl;
         output[n - count[k - array[i]]] = array[i];
 
-        cout << "\t Decrementing the value of index " << k - array[i] << endl; 
+        cout << "\t Decrementing the value of k - " << array[i] << " which is index " << k - array[i] << "." << endl; 
         count[k - array[i]]--;
 
         cout << "Results" << endl;
@@ -207,4 +206,3 @@ void descendingCountingSort(int *array, int n) {
     printArray(output, n, YELLOW);
 }
 
-// A function that prints the given array of integers with the specified color
