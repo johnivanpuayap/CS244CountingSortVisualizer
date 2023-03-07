@@ -1,6 +1,9 @@
+/* 
+The following code is an implementation of the counting sort algorithm, which is a sorting 
+algorithm that works by counting the number of occurrences of each element in an array and 
+using that information to sort the array in ascending order.
+*/
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <cstdlib>
 #include <ctime>
 
@@ -12,23 +15,25 @@ const string RED = "\033[31m";
 const string YELLOW = "\033[33m";
 const string RESET = "\033[0m";
 
-void printArray(int *arr, int n, string color) {
+// A function that prints the given array of integers with the specified color
+void printArray(int *array, int n, string color) {
     cout << color;
     for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
+        cout << array[i] << " ";
     }
     cout << RESET << endl;
 }
 
-void countingSort(int *arr, int n) {
-    
+// The implementation of the counting sort algorithm
+void countingSort(int *array, int n) {
+
     // find maximum element in the array    
     int k;
-    k = *arr;
+    k = *array;
 
     for(int i = 0; i < n; i++){
-        if(arr[i] > k) {
-            k = arr[i];
+        if(array[i] > k) {
+            k = array[i];
         }
     }
 
@@ -52,8 +57,8 @@ void countingSort(int *arr, int n) {
 
     // count frequency of each element in the input array
     for (int i = 0; i < n; i++) {
-        count[arr[i]]++;
-        cout << "Count array after processing element " << arr[i] << ": ";
+        count[array[i]]++;
+        cout << "Count array after processing element " << array[i] << ": ";
         printArray(count, k + 1, RED);
     }
 
@@ -70,13 +75,13 @@ void countingSort(int *arr, int n) {
     //copy elements from input array to output array in sorted order
     for (int i = n-1; i >= 0; i--) {
 
-        cout << "Processing input: " << arr[i] << endl;
-        output[count[arr[i]]-1] = arr[i];
+        cout << "Processing input: " << array[i] << endl;
+        output[count[array[i]]-1] = array[i];
 
-        cout << "\t Adding number " << arr[i] << " to position " << count[arr[i]] << " of the output array."<< endl;
-        count[arr[i]]--;
+        cout << "\t Adding number " << array[i] << " to position " << count[array[i]] << " of the output array."<< endl;
+        count[array[i]]--;
 
-        cout << "\t Decrementing the value of index " << arr[i] << endl; 
+        cout << "\t Decrementing the value of index " << array[i] << endl; 
 
         cout << "Results" << endl;
         cout << "Output array: ";
@@ -89,24 +94,24 @@ void countingSort(int *arr, int n) {
         cout << endl;
     }
 
-    cout << "Sorting finished!" << endl;
+    cout << "Sorting finished!" << endl << endl;
     
     cout << "Input array: ";
-    printArray(arr, n, BLUE);
+    printArray(array, n, BLUE);
     cout << "Count array: ";
     printArray(count, k+1, RED);
     cout << "Output array: ";
     printArray(output, n, YELLOW);
 }
 
+//main function
 int main() {
-    srand(time(nullptr));
 
     int n;
     cout << "Enter size of input array: ";
     cin >> n;
 
-    int arr[n];
+    int array[n];
     
     char choice;
     cout << "Enter the numbers manually (y/n)? ";
@@ -115,18 +120,26 @@ int main() {
         
         for (int i = 0; i < n; i++) {
             cout << "Enter number " << (i+1) << ": ";
-            cin >> arr[i];
+            cin >> array[i];
         }
     } else {
-        // generate n random numbers between 1 and 9
+        
+        //initialize random seed 
+        //ensures that each run of the program will generate a different sequence of random numbers.
+        srand(time(nullptr));
+        
+        // generates n random numbers between 0 and range
+        int range;
+        cout << "Enter range of the randomized number: ";
+        cin >> range++;
         for (int i = 0; i < n; i++) {
-            arr[i] = rand() % 9 + 1;
+            array[i] = rand() % range;
         }
     }
 
     cout << "Input array: ";
-    printArray(arr, n, BLUE);
+    printArray(array, n, BLUE);
 
-    countingSort(arr, n);
+    countingSort(array, n);
     return 0;
 }
